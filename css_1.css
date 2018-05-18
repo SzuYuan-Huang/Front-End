@@ -1,0 +1,39 @@
+p
+{
+    line-height: 2em;
+    letter-spacing: 0.1em;
+    text-indent: 2em;
+}
+/*.marked
+{
+    text-decoration: underline;
+}*/
+.marked span
+{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 125%;
+    text-decoration: underline;
+}
+.marked span:hover
+{
+    background-color: black;
+    color:white;
+}
+p:nth-of-type(1)
+{
+    color:chocolate;
+}
+img
+{
+    height: 150px;
+    width: 200px;
+}
+div:nth-of-type(2)
+{
+    text-align: center;
+}
+div:nth-of-type(3)
+{
+    text-align: right;
+}

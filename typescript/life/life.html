@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>生命靈數</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.4/combined/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.4/combined/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-group">
+            <input id="datepicker" placeholder="輸入時間" readonly/>
+            <button type="button" class="btn btn-primary btn-block" id="enter">輸入</button>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" id="constellation">星座</h4>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" id="lifeNumber">生命靈數</li>
+                <li class="list-group-item" id="detail">運勢</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="js/life.js"></script>
+
+    <script>
+
+        enter.onclick = function () {
+            var datepicker = document.getElementById("datepicker");
+            var constellation = document.getElementById("constellation");
+            var lifeNumber = document.getElementById("lifeNumber");
+            var detail = document.getElementById("detail");
+            var date = datepicker.value;
+            let temp = date.toString().split("-");
+            let number = new NumberologyCalculator(temp[0], temp[1], temp[2]);
+
+            var request = new XMLHttpRequest();
+            request.open("GET", "https://gist.githubusercontent.com/regionbbs/a4633c99d4f3d73c41538134b0b62162/raw/9b81dd8ae2bbe0b088d54c2118e5eb2d1021313f/" + number.getAstrologyConstellationName() + ".json");
+            request.onload = function () {
+
+                var items = JSON.parse(this.responseText);
+                constellation.innerText = items.name;
+                lifeNumber.innerText = "生命靈數：" + number.getLifeNumerology();
+                detail.innerText = "運勢：" + items.lookup[number.getLifeNumerology() - 1];
+            }
+            request.send();
+        }
+
+
+    </script>
+
+    <script>
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: 'yyyy-mm-dd',
+        });
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

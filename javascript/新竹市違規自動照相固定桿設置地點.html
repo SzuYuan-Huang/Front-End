@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+        <table class="table table-bordered">
+            <tr style="background:orangered">
+                <th>地 點</th>
+                <th>速限(km/h)</th>
+                <th>經度</th>
+                <th>緯度</th>
+            </tr>
+        </table>
+    </div>
+
+
+    <script>
+        var request = new XMLHttpRequest();
+        var table = document.querySelector("table");
+
+        request.open("GET", "http://opendata.hccg.gov.tw/dataset/61a36492-1836-42e6-a719-42f8e20cfc43/resource/d36d7276-1782-42df-90cd-03f4cba9c075/download/20180221120235867.json");
+        request.onload = function () {
+            var items = JSON.parse(this.responseText);
+            for (var item of items) 
+            {   
+                var row = document.createElement("tr");            
+                var cell1 = document.createElement("td");
+                var cell2 = document.createElement("td");
+                var cell3 = document.createElement("td");
+                var cell4 = document.createElement("td");
+                cell1.innerText = item['地 點'];
+                row.appendChild(cell1);
+                cell2.innerText = item['速限(km/h)'];
+                row.appendChild(cell2);
+                cell3.innerText = item['經度'];
+                row.appendChild(cell3);
+                cell4.innerText = item['緯度'];
+                row.appendChild(cell4);
+                table.appendChild(row);
+            }         
+        }
+        request.send();
+        table.style.textAlign = "center";
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

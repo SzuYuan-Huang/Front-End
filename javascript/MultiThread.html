@@ -1,0 +1,10 @@
+<script src="Concurrent.Thread-full-20090713.js" language="javascript"></script>
+<script language="javascript" type="text/javascript">
+    Concurrent.Thread.create(function () {
+        var i = 0;
+        while (true) 
+        {
+            document.writeln(i++);
+        }
+    });
+</script>

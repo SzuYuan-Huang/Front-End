@@ -1,0 +1,286 @@
+body 
+{
+    font-size: 15px;
+    line-height: 1.4em;
+    font-family: sans-serif;
+    color: white;
+    background:black; 
+}
+a 
+{
+    color: #009ced;
+    text-decoration: none;    
+}
+a:hover 
+{
+    color: #008ad1;
+    text-decoration: underline;
+}
+.container 
+{
+    width: 1140px;
+    margin: 0 auto;
+}
+.main
+{
+    background-color: black;
+}
+h1.logo a 
+{
+    display: block;
+    width: 150px;
+    height: 150px;
+    background: url('https://static.ezgif.com/images/bg-transparent.gif') no-repeat;
+    white-space: nowrap;
+    text-indent: 110%;
+    overflow: hidden;
+}
+.header
+{
+    background:black;
+}    
+.header .container 
+{
+    position: relative;
+}
+.header .slogan 
+{
+    position: absolute;
+    top: 50px;
+    right: 150px;
+}
+.slogan strong 
+{
+    font-size: 2em;
+    color: red;
+}
+.main-menu 
+{
+    background: black;
+    margin-bottom: 20px;
+    overflow: auto;
+}
+.main-menu ul 
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.main-menu ul li 
+{
+    float: left;
+    width: 25%;
+}
+.main-menu ul li a 
+{
+    display: block;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+}
+.main-menu ul li a:hover 
+{
+    background: red;
+}
+.main 
+{
+    width: 700px;
+    float: left;
+    padding-bottom: 30px;
+}
+.left-side
+{
+    width: 220px;
+    float: left;
+    padding-bottom: 30px;
+}
+.right-side 
+{
+    width: 220px;
+    float: right;
+    padding-bottom: 30px;
+}
+.footer 
+{
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0 40px;
+    clear:both;
+}
+.headline 
+{
+    border: #ddd 0px solid;
+    padding: 10px 10px 10px 220px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.5em;
+    position: relative;
+    min-height: 150px;
+}
+.headline img 
+{
+    position: absolute;
+    left: 10px;
+}    
+.headline h2 
+{
+    margin-top: 0;
+    font-size: 1.5em;
+}
+.headline .more 
+{
+    display: block;
+    text-align: right;
+}
+ul.news-list 
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.news 
+{
+    box-sizing: border-box;
+    width: 340px;
+    height: 250px;
+    overflow: hidden;
+    border: #ddd 0px solid;
+    padding: 10px;
+    margin-bottom: 20px;
+    float: left;
+}
+.news:nth-child(even)
+{
+    margin-left: 20px;
+}
+.news h2 
+{
+    margin-top: 0;
+    line-height: 1.2em;
+}
+.news .img 
+{
+    float: left;
+    margin: 0 10px 10px 0;
+}
+.side-title 
+{
+    padding-bottom: 4px;
+    border-bottom: red 4px solid;
+}
+.top-news 
+{
+    padding-left: 30px;
+}
+.top-news li 
+{
+    line-height: 1.5em;
+    padding-bottom: 5px;
+}
+#topBtn 
+{
+    position: fixed;
+    bottom: 150px;
+    right: 0;
+    background: red;
+    padding: 10px 20px;
+    font-size: 2em;
+    color: #fff;
+    cursor: pointer;
+}
+.leftside-ul > li
+{
+    box-sizing: border-box;
+    float: left;
+    list-style: none;
+    border: 1px solid black;
+    padding: 15px 20px;
+    width: 70px;
+    text-align: center;
+    background-color: red;
+    color:white;
+}
+.leftside-ul > li:hover
+{
+    cursor: pointer;
+    background: white;
+    color: black;
+}
+.leftside-ul > li:nth-child(1)
+{
+    background-image: url('../images/sport.png');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+.leftside-ul > li:nth-child(2)
+{
+    background-image: url('../images/controller.png');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+.leftside-ul > li:nth-child(3)
+{
+    background-image: url('../images/sales-performance.png');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+.leftside-ul > li:nth-child(4)
+{
+    background-image: url('../images/movie.png');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+.leftside-ul > li:nth-child(5)
+{
+    background-image: url('../images/music.png');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+.leftside-ul > li:nth-child(6)
+{
+    background-image: url('../images/literature.png');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+.leftside-ul > li:nth-child(1):hover
+{
+    background-image: url('../images/sport.gif');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+.leftside-ul > li:nth-child(2):hover
+{
+    background-image: url('../images/controller.gif');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+.leftside-ul > li:nth-child(3):hover
+{
+    background-image: url('../images/sales-performance.gif');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+.leftside-ul > li:nth-child(4):hover
+{
+    background-image: url('../images/movie.gif');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+.leftside-ul > li:nth-child(5):hover
+{
+    background-image: url('../images/music.gif');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+.leftside-ul > li:nth-child(6):hover
+{
+    background-image: url('../images/literature.gif');
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+    
+      

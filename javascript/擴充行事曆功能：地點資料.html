@@ -1,0 +1,264 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="fullcalendar-3.9.0/fullcalendar.css" rel="stylesheet">
+    <link href="fullcalendar-3.9.0/fullcalendar.print.css" rel="stylesheet" media="print">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="fullcalendar-3.9.0/lib/moment.min.js"></script>
+    <script src="fullcalendar-3.9.0/lib/jquery.min.js"></script>
+    <script src="fullcalendar-3.9.0/fullcalendar.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.4/combined/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.4/combined/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+
+    <script>
+
+        var d = new Date();
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+
+        var output = d.getFullYear() + '/' +
+            (month < 10 ? '0' : '') + month + '/' +
+            (day < 10 ? '0' : '') + day;
+
+        var valeventsiCals = '[';
+
+        for (var i = 0; i < localStorage.length; i++) {
+            var item = localStorage.getItem(localStorage.key(i));
+            valeventsiCals += item;
+
+            if (i != localStorage.length - 1) {
+                valeventsiCals += ",";
+            }
+        }
+        valeventsiCals += ']';
+
+        $(document).ready(function () {
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                defaultDate: output,
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                events: jQuery.parseJSON(valeventsiCals),
+                eventRender: function (event, element) {
+                    element.click(function () {
+                        var directionsService = null;
+                        var directionsDisplay = null;
+                        if (event.locationDescription == "") {
+                            var center = { lat: event.lat, lng: event.lng };
+                            var tempMap = new google.maps.Map(
+                                document.getElementById('mapEvent'), {
+                                    center: center,
+                                    zoom: 15
+                                });
+
+                            var marker = new google.maps.Marker({
+                                position: center,
+                                map: tempMap,
+                                title: center
+                            });
+                        }
+                        else {
+                            var request = new XMLHttpRequest();
+                            request.open("GET", "https://maps.googleapis.com/maps/api/geocode/json?address=" + event.locationDescription + "&key=AIzaSyANfYchm9Nz4Wtg0Ta7aF-s2q1zh5OiS9I");
+                            request.onload = function () {
+
+                                var items = JSON.parse(this.responseText);
+                                var center = { lat: items.results[0].geometry.location.lat, lng: items.results[0].geometry.location.lng }
+                                //console.log(items);
+                                var tempMap = new google.maps.Map(
+                                    document.getElementById('mapEvent'), {
+                                        center: center,
+                                        zoom: 15
+                                    });
+                                var marker = new google.maps.Marker(
+                                    {
+                                        position: center,
+                                        map: tempMap,
+                                        title: items.results[0].formatted_address
+                                    });
+                            }
+                            request.send();
+                        }
+                    });
+
+                    element.append("<span class='closeon'>[刪除]</span>");
+                    element.find(".closeon").click(function () {
+                        $('#calendar').fullCalendar('removeEvents', event._id);
+
+                        localStorage.removeItem(event.id);
+                    });
+                },
+            });
+
+        });
+
+    </script>
+    <style>
+        body {
+            margin: 40px 10px;
+            padding: 0;
+            font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+            font-size: 14px;
+        }
+
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!--Calendar Body-->
+    <div id="calendar" class="fc fc-ltr fc-unthemed"></div>
+
+    <div class="container" align="center">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg mt-3" data-toggle="modal" data-target="#modelId">
+            輸入事件
+        </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="modelTitleId">關閉</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input id="datepickerStart" placeholder="起始時間" readonly/>
+                        <input id="datepickerEnd" placeholder="結束時間" readonly/>
+                        <input type="text" class="form-control" id="data" placeholder="內容" />
+                        <input type="text" class="form-control" id="locationDescription" placeholder="活動地點" />
+                        <input type="color" name="favcolor" id="backColor" value="#ff0000" />
+                        <div class="mapstyle" id="map" style="width:100%;height:50%"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    <button type="button" class="btn btn-primary" id="enter">輸入</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="mapstyle" id="mapEvent" style="width:100%;height:50%"></div>
+    </div>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANfYchm9Nz4Wtg0Ta7aF-s2q1zh5OiS9I">
+    </script>
+
+    <script>
+        var data = document.getElementById("data");
+        var datepickerStart = document.getElementById("datepickerStart");
+        var datepickerEnd = document.getElementById("datepickerEnd");
+        var backColor = document.getElementById("backColor");
+        var enter = document.getElementById("enter");
+        var locationDescription = document.getElementById("locationDescription");
+
+        var map;
+        var marker = null;
+        var center = { lat: 24.7571075, lng: 120.952429 };
+        var mapLat = null;
+        var mapLng = null;
+
+        window.onload = function () {
+
+            map = new google.maps.Map(
+                document.getElementById('map'), {
+                    center: center,
+                    zoom: 15
+                });
+
+            map.addListener('click', function (e) {
+                map.setCenter(e.latLng);
+                if (marker == null) {
+                    marker = new google.maps.Marker({
+                        position: e.latLng,
+                        map: map,
+                        title: e.latLng.toString()
+                    });
+                } else {
+                    marker.setPosition(e.latLng);
+                }
+                mapLat = e.latLng.lat();
+                mapLng = e.latLng.lng();
+            });
+        }
+
+        enter.onclick = function () {
+            var primary_key = _uuid();
+            $('#calendar').fullCalendar("renderEvent",
+                {
+                    id: primary_key,
+                    title: data.value,
+                    start: datepickerStart.value,
+                    end: datepickerEnd.value,
+                    backgroundColor: backColor.value,
+                    textColor: 'white',
+                    locationDescription: locationDescription.value,
+                    lat: mapLat,
+                    lng: mapLng
+                });
+            localStorage.setItem(primary_key, JSON.stringify(
+                {
+                    "id": primary_key,
+                    "title": data.value,
+                    "start": datepickerStart.value,
+                    "end": datepickerEnd.value,
+                    "backgroundColor": backColor.value,
+                    "textColor": 'white',
+                    "locationDescription": locationDescription.value,
+                    "lat": mapLat,
+                    "lng": mapLng
+                }
+            )
+            )
+            mapLat = null;
+            mapLng = null;
+        }
+
+    </script>
+
+    <script>
+        function _uuid() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) { var r = Math.random() * 16 | 0, v = c == 'x' ? r : r & 0x3 | 0x8; return v.toString(16); });
+        }
+    </script>
+
+    <script>
+        $('#datepickerStart').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: 'yyyy-mm-dd',
+        });
+        $('#datepickerEnd').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: 'yyyy-mm-dd',
+        });
+    </script>
+
+</body>
+
+</html>

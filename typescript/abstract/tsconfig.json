@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "system",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "outFile": "./js/abstract.js",
+        "allowSyntheticDefaultImports": true,
+    },
+    "files": [
+        "abstract.ts"
+    ]
+}

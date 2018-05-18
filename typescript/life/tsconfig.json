@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "system",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "outFile": "./js/life.js",
+        "allowSyntheticDefaultImports": true,
+    },
+    "files": [
+        "life.ts"
+    ]
+}

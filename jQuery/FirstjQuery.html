@@ -1,0 +1,50 @@
+<html>
+
+<body>
+    <button>click me_1</button>
+    <button>click me_2</button>
+    <button>click me_3</button>
+    <button>click me_4</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $("body").append(
+            $("<p>").text("Hello jQuery.").css("color", "#fff000").css("font-size", "100px")
+        )
+        $("body").append(
+            $("<p>").text("Hi.").css("color", "red").css("font-size", "100px")
+        )
+
+        $("button:eq(0)").on("click", function (e) {
+            console.log("Oh, you clicked me.");
+            var button = $(e.target);
+            button
+                .css("background-color", "yellow")
+                .css("font-size", 24)
+                .css("font-famlily", "微軟正黑體")
+                .text("You clicked me")
+        });
+
+        var newButton = $("<button>")
+            .css("border-style", "dotted")
+            .css("background-color", "blue")
+            .css("color", "#ffffff")
+            .css("font-size", 24)
+            .text("New Button")
+            .click(function () {
+                alert("you click this button.");
+            });
+
+        $("body").append(newButton);
+
+            $("button").on("click", function (eventHandler) {
+                console.log($(eventHandler.target).text());
+            });
+
+        var p = $("p");
+        console.log(p.eq(1).text());
+        console.log(p);
+
+    </script>
+</body>
+
+</html>

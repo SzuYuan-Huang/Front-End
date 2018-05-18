@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <style>
+        #sortable {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 60%;
+        }
+
+        #sortable li {
+            margin: 0 3px 3px 3px;
+            padding: 0.4em;
+            padding-left: 1.5em;
+            font-size: 1.4em;
+            height: 18px;
+        }
+
+        #sortable li span {
+            position: absolute;
+            margin-left: -1.3em;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="sortable">
+
+    </ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                url: "http://opendata.hccg.gov.tw/dataset/0ada783d-f3ac-4d0d-9344-955fd7438cd8/resource/508e6209-b1b3-494d-9469-9cf8831eaf80/download/20180314164845937.json",
+                type: "GET"
+            }).done(function (data) {
+                for (var item of data) {
+                    $("#sortable").append($("<li class='ui-state-default'>").text(item.機構名稱));
+                }
+            });
+
+            $("#sortable").sortable({
+                placeholder: "ui-state-highlight"
+            });
+
+            $("#sortable").sortable({
+                forcePlaceholderSize: true,
+                tolerance: 'pointer',
+                cursor: 'pointer',
+                over: function () {
+                    removeIntent = false;
+                },
+                out: function () {
+                    removeIntent = true;
+                },
+                beforeStop: function (event, ui) {
+                    if (removeIntent === true) {
+                        ui.item.hide();
+                        if (confirm('Are you sure want to remove this item?')) {
+                            ui.item.remove();
+                        } else {
+                            ui.item.show();
+                        }
+                    }
+                }
+            });
+
+            $("#sortable").disableSelection();
+
+
+        });
+    </script>
+</body>
+
+</html>

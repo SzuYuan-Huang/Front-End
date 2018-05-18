@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="col">
+            <div class="col mt-3">
+                <div class="button-group" align="center">
+                    <button type="button" class="btn btn-primary" style="width:32%" id="start">開始</button>
+                    <button type="button" class="btn btn-warning" style="width:32%" id="restart">放棄重來</button>
+                    <button type="button" class="btn btn-danger" style="width:32%" id="answer">看答案</button>
+                </div>
+            </div>
+            <div class="col mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">遊戲歷程</h4>
+                    </div>
+                    <ul class="list-group" id="list">
+                    </ul>
+                </div>
+            </div>
+            <div class="col mt-3">
+                <div class="input-group">
+                    <button class="btn" disabled>猜答案</button>
+                    <input type="text" class="form-control" id="input" maxlength="4">
+                    <button type="button" class="btn btn-outline-dark" id="enter">猜</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var input = document.getElementById("input");
+        var enter = document.getElementById("enter");
+        var start = document.getElementById("start");
+        var restart = document.getElementById("restart");
+        var answer = document.getElementById("answer");
+        var gsLst = "0123456789";
+        var gsAnswer = "";
+
+        // 產生新數字
+        function doNewnum() 
+        {
+            var sNew = "";
+            var sLst = gsLst;
+            for (var i = 0; i < 4; i++) 
+            {
+                var r = Math.round(Math.random() * (sLst.length - 1));
+                var n = sLst.substr(r, 1);
+                sLst = sLst.substring(0, r) + sLst.substr(r + 1, sLst.length);
+                sNew += n;
+            }
+            return sNew;
+        }
+
+        // 檢查是否重覆
+        function doCheckDu(str) 
+        {
+            var bCheck = true;
+            var ary = new Array();
+            for (var i = 0; i < str.length; i++) 
+            {
+                ary[i] = str.substring(i, i + 1);
+                for (var j = 0; j < ary.length - 1; j++) 
+                {
+                    if (ary[i] == ary[j]) 
+                    {
+                        bCheck = false;
+                    }
+                }
+                if (!bCheck) break;
+            }
+            return bCheck;
+        }
+
+        enter.onclick = function () 
+        {
+            // 檢查數字正確性
+            var sNum = "" + input.value;
+            if (isNaN(sNum)) 
+            {
+                alert("數值異常！");
+                return false;
+            }
+            else if (sNum.length != 4) 
+            {
+                alert("請填入四個數字！");
+                return false;
+            }
+            else if (!doCheckDu(sNum)) 
+            {
+                alert("四個數字不可重覆！");
+                return false;
+            }
+
+            // 猜的結果
+            var iA = 0;
+            var iB = 0;
+            for (var i = 0; i < 4; i++) 
+            {
+                var s1 = sNum.substring(i, i + 1);
+                for (var j = 0; j < 4; j++) 
+                {
+                    var s2 = gsAnswer.substring(j, j + 1);
+                    if (s1 == s2) 
+                    {
+                        if (i == j) 
+                        {
+                            iA++;
+                        } 
+                        else 
+                        {
+                            iB++;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            //創建紀錄
+            var list = document.getElementById("list");
+            var li = document.createElement("li");
+            var a1 = document.createElement("a");
+            if(iA==4)
+            {
+                a1.className = "badge badge-pill badge-success";
+            }
+            else
+            {
+                a1.className = "badge badge-pill badge-danger";
+            }
+            a1.href="#";
+            a1.innerText = iA + "A" + iB + "B";
+            li.className = "list-group-item";
+            li.appendChild(a1);
+            li.innerHTML+=sNum;
+            list.appendChild(li);
+            
+        }
+
+        start.onclick = function()
+        {
+            gsAnswer = doNewnum();
+            var list = document.getElementById("list");
+            list.innerHTML=null;
+            input.value = null;
+        }
+
+        restart.onclick = function()
+        {
+            gsAnswer = doNewnum();
+            var list = document.getElementById("list");
+            list.innerHTML=null;
+            input.value = null;
+        }
+
+        answer.onclick = function()
+        {
+            alert("正確答案為：" + gsAnswer);
+        }
+
+    </script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

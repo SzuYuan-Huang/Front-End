@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "system",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "outFile": "./js/calc.js",
+        "allowSyntheticDefaultImports": true,
+    },
+    "files": [
+        "calc.ts"
+    ]
+}

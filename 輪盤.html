@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>輪盤</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .row-with-gap {
+            margin-bottom: 20px;
+        }
+
+        .img-responsive {
+            border: solid 5px transparent;
+            transition: all .3s;
+        }
+
+        .img-responsive.active {
+            border: solid 5px red;
+            box-shadow: 0 0 20px red;
+            transition: all 0s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row row-with-gap">
+            <div class="col-1">
+                <img id="block1" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block2" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block3" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block4" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block5" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block6" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block7" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block8" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block9" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block10" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block11" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block12" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+        </div>
+
+        <div class="row row-with-gap">
+            <div class="col-1">
+                <img id="block32" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="offset-10 col-1">
+                <img id="block13" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+        </div>
+
+        <div class="row row-with-gap">
+            <div class="col-1">
+                <img id="block31" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="offset-10 col-1">
+                <img id="block14" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+        </div>
+
+        <div class="row row-with-gap">
+            <div class="col-1">
+                <img id="block30" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="offset-10 col-1">
+                <img id="block15" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+        </div>
+
+        <div class="row row-with-gap">
+            <div class="col-1">
+                <img id="block29" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="offset-10 col-1">
+                <img id="block16" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+        </div>
+
+        <div class="row row-with-gap">
+            <div class="col-1">
+                <img id="block28" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block27" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block26" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block25" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block24" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block23" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block22" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block21" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block20" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block19" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block18" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+            <div class="col-1">
+                <img id="block17" src="https://dummyimage.com/150.png" class="img-responsive" alt="Image">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <button id="go" type="button" class="btn btn-primary btn-block mt-3">GO!</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        var blocks = [];
+        var currentBlock = 0;
+        var forwardSteps = 0;
+        var currentDeg = 0;
+        var stepDeg = 0;
+        var randomSteps = 0;
+
+        function init() {
+            var n = 0;
+
+            while (true) {
+                ++n;
+                var block = document.getElementById("block" + n);
+
+                if (!block) {
+                    break;
+                }
+
+                //block.src = "https://placehold.it/150?text=" + block.id;
+                blocks.push(block);
+            }
+
+            document.getElementById("go").onclick = function () {
+                forwardSteps = (blocks.length * 5);
+                forwardSteps += Math.floor(Math.random() * blocks.length);
+                randomSteps = forwardSteps;
+                console.log(randomSteps);
+
+                stepDeg = 180 / forwardSteps;
+                currentDeg = 0;
+
+                forwardBlock();
+            }
+        }
+
+        function forwardBlock() {
+            blocks[currentBlock].className = "img-responsive";
+
+            currentBlock++;
+            forwardSteps--;
+           
+           
+
+            if (currentBlock >= blocks.length) {
+                currentBlock = 0;
+            }
+
+            blocks[currentBlock].className = "img-responsive active";
+
+            if (forwardSteps < randomSteps / 2) {
+                currentDeg -= stepDeg;
+                if (--forwardSteps > 0) {
+                    var rad = degreeToRadius(currentDeg - 90);
+                    var a = Math.abs(Math.tan(rad));
+
+                    var speed = Math.max(10, Math.min(250, 30 * a));
+                    console.log("current: " + currentDeg + " rad: " + rad + " a: " + a + " speed: " + speed);
+                    setTimeout(forwardBlock, speed);
+                }
+            }
+            else {
+                currentDeg += stepDeg;
+                if (--forwardSteps > 0) {
+                    var rad = degreeToRadius(currentDeg - 90);
+                    var a = Math.abs(Math.tan(rad));
+
+                    var speed = Math.max(10, Math.min(250, 30 * a));
+                    console.log("current: " + currentDeg + "rad: " + rad + " a: " + a + " speed: " + speed);
+                    setTimeout(forwardBlock, speed);
+                }
+            }
+        }
+
+        function degreeToRadius(deg) {
+            return deg * Math.PI / 180;
+        }
+
+        init();
+    
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

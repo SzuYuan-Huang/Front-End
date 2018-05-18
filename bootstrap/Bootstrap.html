@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+      <div class="alert alert-primary" role="alert">
+          <strong>My demo alert.</strong>
+      </div>
+      <div class="alert alert-danger" role="alert">
+          <strong>已檢測到威害</strong>
+      </div>
+      <div class="alert alert-secondary" role="alert">
+          <strong>Warning!</strong> <a href="#" class="alert-link">GG</a>
+      </div>
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">標題</h4>
+        <p>我是額外內容</p>
+        <p class="mb-0">自己看</p>
+      </div>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;Close</span>
+        </button>
+        <strong>Hi!</strong> Don't mind me!
+      </div>
+
+      <h1>Badge Demo <span class="badge badge-primary">5</span></h1>
+      <button class="btn btn-primary">
+              Notification <span class="badge badge-dark">4</span>
+      </button>
+      <h1>Badge Pill <span class="badge badge-pill badge-warning">3</span></h1>
+      <h1>Link <a href="#" class="badge badge-danger">Click!</a></h1>
+
+      <nav class="breadcrumb">
+          <a class="breadcrumb-item" href="#">Home</a>
+          <a class="breadcrumb-item" href="#">Library</a>
+          <span class="breadcrumb-item active">About</span>
+      </nav>
+      
+      <button type="button" class="btn btn-primary">Primary</button>
+      <input name="demobutton" id="demobutton" class="btn btn-success" type="button" value="input button">
+      <a name="demobutton" id="demobutton" class="btn btn-dark" href="#" role="button">A Button</a>
+      <button type="button" class="btn btn-outline-primary">OutLine</button>
+      <button type="button" class="btn btn-outline-primary btn-lg">BigOutLine</button>
+      <button type="button" class="btn btn-outline-primary btn-sm">SmallOutLine</button>
+      <button type="button" name="demobutton" id="demobutton" class="btn btn-info btn-lg btn-block">BigBlock</button>
+      <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Active Primary link</a>
+      <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Active Link</a>
+      <button type="button" class="btn btn-primary" disabled>Disable</button>
+      <a href="#" class="btn btn-primary btn-lg disabled" role="button" aria-disabled="true">Disable Primary link</a>
+      <a href="#" class="btn btn-secondary btn-lg disabled" role="button" aria-disabled="true">Disable Link</a>
+      <button type="button" class="btn btn-danger" data-toggle="button" aria-pressed="false" autocomplete="off">Toggle Active</button>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-dark active">
+          <input type="checkbox" name="options" id="select1" checked autocomplete="off">Item1
+        </label>
+        <label class="btn btn-dark">
+          <input type="checkbox" name="options" id="select2" autocomplete="off">Item2
+        </label>
+        <label class="btn btn-dark">
+          <input type="checkbox" name="options" id="select3" autocomplete="off">Item3
+        </label>
+      </div>
+
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+        Launch
+      </button>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+        Launch
+      </button>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="modelTitleId">Modal title</h4>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                Add rows here
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 bg-primary">
+            colume 1
+          </div>
+          <div class="col-md-7 bg-warning">
+            colume 2
+          </div>
+          <div class="col-md-1 bg-danger">
+            colume 3
+          </div>
+        </div>       
+      </div>
+
+      <div class="container-fluid">
+          <div class="row">
+            <div class="col bg-primary">
+              colume 1
+            </div>
+            <div class="col bg-warning">
+              colume 2
+            </div>
+            <div class="col bg-danger">
+              colume 3
+            </div>
+          </div>       
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col bg-primary">
+            <h6>section1</h6>
+            <p>Labore anim non aliqua excepteur anim ipsum mollit labore incididunt dolor veniam consequat.</p>
+          </div>
+          <div class="col bg-warning">
+            <h6>section2</h6>
+            <p>Labore anim non aliqua excepteur anim ipsum mollit labore incididunt dolor veniam consequat.</p>
+          </div>
+          <div class="col bg-danger">
+            <h6>section3</h6>
+            <p>Labore anim non aliqua excepteur anim ipsum mollit labore incididunt dolor veniam consequat.</p>
+          </div>
+        </div>       
+      </div>
+      
+      <script>
+        $('#exampleModal').on('show.bs.modal', event => {
+          var button = $(event.relatedTarget);
+          var modal = $(this);
+          // Use above variables to manipulate the DOM
+          
+        });
+      </script>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="modelTitleId">Modal title</h4>
+            </div>
+            <div class="modal-body">
+              Body
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="modelTitleId">Modal title</h4>
+            </div>
+            <div class="modal-body">
+              Body
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <script>
+        $(".alert").alert();
+      </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

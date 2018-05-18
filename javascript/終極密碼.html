@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>終極密碼</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <style>
+        .btn-circle {
+            width: 70px;
+            height: 70px;
+            padding: 10px 16px;
+            font-size: 24px;
+            line-height: 1.33;
+            border-radius: 35px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="background:black">
+        <div class="col">
+            <div class="col text-center" style="color:white">
+                <h1>終極密碼</h1>
+                <h1>0~99</h1>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="input" readonly style="background:black;color:white">
+                </div>
+            </div>
+            <div class="col" style="color:white">
+                <div class="button-group" align="center">
+                    <button type="button" class="btn btn-dark btn-circle">1</button>
+                    <button type="button" class="btn btn-dark btn-circle">2</button>
+                    <button type="button" class="btn btn-dark btn-circle">3</button>
+                </div>
+                <div class="button-group" align="center">
+                    <button type="button" class="btn btn-dark btn-circle">4</button>
+                    <button type="button" class="btn btn-dark btn-circle">5</button>
+                    <button type="button" class="btn btn-dark btn-circle">6</button>
+                </div>
+                <div class="button-group" align="center">
+                    <button type="button" class="btn btn-dark btn-circle">7</button>
+                    <button type="button" class="btn btn-dark btn-circle">8</button>
+                    <button type="button" class="btn btn-dark btn-circle">9</button>
+                </div>
+                <div class="button-group" align="center">
+                    <button type="button" class="btn btn-dark btn-circle btn-outline-danger" id="back">←</button>
+                    <button type="button" class="btn btn-dark btn-circle">0</button>
+                    <button type="button" class="btn btn-dark btn-circle btn-outline-success" id="enter">↩</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var buttons = document.getElementsByTagName("button");
+        var input = document.getElementById("input");
+        var max = 99;
+        var min = 0;
+        var num = Math.floor(Math.random() * 100);
+        var count = 0;
+
+
+        for (var i = 0; i < buttons.length; i++) {
+            var button = buttons[i];
+            button.onclick = function () {
+                var btn = event.srcElement;
+                if (input.value.length < 2) {
+                    input.value += btn.innerHTML;
+                }
+            }
+        }
+
+        back.onclick = function () {
+            input.value = input.value.substring(0, input.value.length - 1)
+        }
+
+        enter.onclick = function () 
+        {
+            if (parseInt(input.value) > num) 
+            {
+                count++;
+                max = parseInt(input.value);
+                alert(min + "~" + max);
+                console.log(parseInt(input.value) + " : " + min + "~" + max);
+            }
+            else if (parseInt(input.value) == num) 
+            {
+                count++;
+                alert("恭喜您答對，正確數字" + num);
+                console.log(parseInt(input.value) + " : 正確答案，總共猜了" + count + "次");
+            }
+            else 
+            {
+                count++;
+                min = parseInt(input.value);
+                alert(min + "~" + max);
+                console.log(parseInt(input.value) + " : " + min + "~" + max);
+            }
+        }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

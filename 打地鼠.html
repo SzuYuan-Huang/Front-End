@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>打地鼠</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <style>
+        body {
+            background: url("codes/whack-a-mole/images/bg-dirt.png");
+        }
+
+        #playground {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 1px;
+            height: 1px;
+            margin: auto;
+        }
+
+        #playground .mole {
+            width: 120px;
+            height: 120px;
+            line-height: 120px;
+            text-align: center;
+            background-image: url("codes/whack-a-mole/images/grass-upper.png");
+            background-repeat: no-repeat;
+            background-size: 120px 60px;
+            background-position: top 0;
+            position: relative;
+        }
+
+        #playground .mole::before {
+            content: "";
+            width: 80px;
+            height: 80px;
+            background-image: url("codes/whack-a-mole/images/mole-laugh1.png");
+            background-repeat: no-repeat;
+            background-size: 80px 80px;
+            background-position: top 0;
+            position: absolute;
+            top: 40px;
+            left: 20px;
+            opacity: .5;
+            transition: all 1s;
+        }
+
+        #playground .mole.active::before {
+            background-image: url("codes/whack-a-mole/images/mole.png");
+            top: 0;
+            opacity: 1;
+            transition: all .3s;
+        }
+
+        #playground .mole.hit::before {
+            background-image: url("codes/whack-a-mole/images/mole-thump4.png");
+            top: 40px;
+            opacity: 1;
+            transition: all .2s;
+        }
+
+        #playground .mole::after {
+            content: "";
+            width: 120px;
+            height: 60px;
+            background-image: url("codes/whack-a-mole/images/grass-lower.png");
+            background-repeat: no-repeat;
+            background-size: 120px 60px;
+            background-position: top 0;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        #control-panel {
+            position: fixed;
+            right: 0;
+            top: 0;
+            background: rgba(42, 30, 207, 0.459)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div id="playground">
+            <!--<div class="mole"></div>-->
+        </div>
+        <div id="life-bar" class="container text-center">
+            <h3 style="color:red">生命數</h3>
+            <div id="life_bar" class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                100
+            </div>
+        </div>
+        <div id="control-panel">
+            <h1 style="color:red">記分板</h1>
+            <h3 style="color:greenyellow" id="yourScore">你的分數：0</h3>
+            <h3 style="color:greenyellow" id="now_level">等級：1</h3>
+            <div class="form-group">
+                <select class="form-control" name="" id="mole-block">
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary" id="start">開始</button>
+            <button type="button" class="btn btn-primary" id="end">結束</button>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        var playground = $("#playground");
+
+        $(function () {
+            var scoreCount = 0;
+            var life_bar = 100;
+            var timer = null;
+            var bonus = 0;
+            var levelDifficult = [
+                { level: 1, scoreMin: 0, scoreMax: 9, moles: 1, speed: 1500 },
+                { level: 2, scoreMin: 10, scoreMax: 19, moles: 2, speed: 1500 },
+                { level: 3, scoreMin: 20, scoreMax: 29, moles: 2, speed: 1000 },
+                { level: 4, scoreMin: 30, scoreMax: 39, moles: 3, speed: 1000 },
+                { level: 5, scoreMin: 40, scoreMax: 49, moles: 3, speed: 750 },
+                { level: 6, scoreMin: 50, scoreMax: Number.MAX_VALUE, moles: 4, speed: 750 }
+            ];
+
+            $("#mole-block").change(function () {
+                var mole_block = $(this);
+                createMoleTable(mole_block.val());
+            });
+
+            $("#start").click(function () {
+                scoreCount = 0;
+                life_bar = 100;
+                bonus = 0;
+                lifeBar();
+                moleActive();
+            })
+
+            $("#end").click(function () {
+                $(".mole.active").removeClass("active");
+                $(".mole.hit").removeClass("hit");
+                clearTimeout(timer);
+                alert("Game Over!");
+            })
+
+            lifeBar = function () {
+                //life_Update
+                $("#life_bar")
+                    .attr("aria-valuenow", life_bar)
+                    .css("width", life_bar + "%")
+                    .text(life_bar);
+            }
+
+            moleActive = function () {
+                //MoleMove
+                var moles = playground.find(".mole"),
+                    nowLevelDetail = getNowLevel();
+
+                var active = moles.filter(".active").length;
+                var hit = moles.filter(".hit").length;
+                life_bar -= Math.max(0, active - hit);
+                lifeBar();
+
+                if (life_bar <= 0) {
+                    $(".mole.active").removeClass("active");
+                    $(".mole.hit").removeClass("hit");
+                    clearTimeout(timer);
+                    alert("GAME OVER!");
+                    return;
+                }
+
+                moles.removeClass("active").removeClass("hit");
+
+                $("#now_level").text("等級：" + nowLevelDetail.level);
+
+
+                if (bonus == 0) {
+                    for (var i = 0; i < nowLevelDetail.moles; i++) {
+                        var next = Math.floor(Math.random() * moles.length);
+                        moles.eq(next).addClass("active");
+                    }
+                    bonus++;
+                    timer = setTimeout(moleActive, nowLevelDetail.speed);
+                }
+                else {
+                    if (bonus % 5 == 0) {
+                        for (var i = 0; i < moles.length; i++) {
+                            moles.eq(i).addClass("active");
+                        }
+                        bonus++;
+                        timer = setTimeout(moleActive, 2000);
+                    }
+                    else {
+                        for (var i = 0; i < nowLevelDetail.moles; i++) {
+                            var next = Math.floor(Math.random() * moles.length);
+                            moles.eq(next).addClass("active");
+                        }
+                        bonus++;
+                        timer = setTimeout(moleActive, nowLevelDetail.speed);
+                    }
+                }
+
+            }
+
+            getNowLevel = function () {
+                for (var item of levelDifficult) {
+                    if (scoreCount >= item.scoreMin && scoreCount <= item.scoreMax) {
+                        return item;
+                    }
+                }
+            }
+
+            playground.on("click", ".mole", function () {
+                var nowMole = $(this);        // this == div.mole
+
+                if (nowMole.is(".active")) {
+                    scoreCount += 1;
+                    life_bar++;
+                    //每打死一隻地鼠加生命值1
+                    if (life_bar >= 100) {
+                        life_bar = 100;
+                    }
+                    lifeBar();
+                    $("#yourScore").text("你的分數：" + scoreCount);
+
+                    nowMole
+                        .removeClass("active")
+                        .addClass("hit");
+                }
+            });
+
+            createMoleTable = function (value) {
+                playground.empty();
+                var table = $("<table>")
+                for (var i = 0; i < value; i++) {
+                    var tr = $("<tr>");
+                    for (var j = 0; j < value; j++) {
+                        var td = $("<td>")
+                            .appendTo(tr);
+                        var div = $("<div>")
+                            .addClass("mole")
+                            .appendTo(td);
+                    }
+                    tr.appendTo(table);
+                }
+                table
+                    .appendTo(playground)
+                    .css({
+                        marginTop: -1 * (table.outerHeight() / 2),
+                        marginLeft: -1 * (table.outerWidth() / 2)
+                    });
+            }
+            createMoleTable(3);
+        });
+
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
